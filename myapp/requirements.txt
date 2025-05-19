@@ -3,4 +3,5 @@ mysqlclient
 djangorestframework
 djangorestframework-simplejwt
 gunicorn
-corsheaders
+django-cors-headers
+dj-database-url

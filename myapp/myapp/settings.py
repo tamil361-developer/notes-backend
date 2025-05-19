@@ -19,12 +19,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q9*n9$g0e8r0+pz5pufx!m%-%%u0^bcw8dt+@mgsp2*5o(vqkw'
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-q9*n9$g0e8r0+pz5pufx!m%-%%u0^bcw8dt+@mgsp2*5o(vqkw')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-import os
-DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']  # Change to your Render URL after first deploy
 
@@ -76,16 +79,9 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'notes',
-        'USER':'root',
-        'PASSWORD':'tamil0306',
-        'HOST':'localhost',
-        'PORT':'3306',
-    }
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
 
 
