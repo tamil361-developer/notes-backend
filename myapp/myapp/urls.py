@@ -17,11 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from api.views import RegisterView, LoginView, NoteListCreateView
+from api.views import RegisterView, LoginView, NoteListCreateView, NoteDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', LoginView.as_view(), name='login'),
     path('api/notes/', NoteListCreateView.as_view(), name='notes'),
+    path('api/notes/<int:pk>/', NoteDetailView.as_view(), name='note-detail'),
 ]

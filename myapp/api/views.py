@@ -1,3 +1,6 @@
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
+# Note detail view for GET, PUT, DELETE
+
 
 
 from rest_framework import status
@@ -8,6 +11,15 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .serializer import RegisterSerializer, NoteSerializer
 from .models import Note
+
+class NoteDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Only allow users to access their own notes
+        return Note.objects.filter(user=self.request.user)
 
 class RegisterView(APIView):
     def post(self, request):
