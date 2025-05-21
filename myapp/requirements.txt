@@ -5,3 +5,4 @@ djangorestframework-simplejwt
 gunicorn
 django-cors-headers
 dj-database-url
+tamil
